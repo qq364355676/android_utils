@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * SharedPreferences 操作类
  */
-public class SPutils {
+public class SPUtils {
 
     /**
      * 保存在手机里面的文件名
