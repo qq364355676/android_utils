@@ -1,12 +1,7 @@
 package com.utils.commonutils.util;
 
-/**
- * Created by Administrator on 2017/8/30.
- */
-
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -17,7 +12,7 @@ import java.util.Map;
 public class SPUtils {
 
     /**
-     * 保存在手机里面的文件名
+     * 保存在手机里面的SharedPreferences文件名
      */
     public static final String SHAREDPREFERENCES_NAME = "shared_data";
 
@@ -26,28 +21,26 @@ public class SPUtils {
      *
      * @param context
      * @param key
-     * @param object
+     * @param obj
      */
-    public static void put(Context context, String key, Object object) {
+    public static void put(Context context, String key, Object obj) {
 
         SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-
-        if (object instanceof String) {
-            editor.putString(key, (String) object);
-        } else if (object instanceof Integer) {
-            editor.putInt(key, (Integer) object);
-        } else if (object instanceof Boolean) {
-            editor.putBoolean(key, (Boolean) object);
-        } else if (object instanceof Float) {
-            editor.putFloat(key, (Float) object);
-        } else if (object instanceof Long) {
-            editor.putLong(key, (Long) object);
+        if (obj instanceof String) {
+            editor.putString(key, (String) obj);
+        } else if (obj instanceof Integer) {
+            editor.putInt(key, (Integer) obj);
+        } else if (obj instanceof Boolean) {
+            editor.putBoolean(key, (Boolean) obj);
+        } else if (obj instanceof Float) {
+            editor.putFloat(key, (Float) obj);
+        } else if (obj instanceof Long) {
+            editor.putLong(key, (Long) obj);
         } else {
-            editor.putString(key, object.toString());
+            editor.putString(key, obj.toString());
         }
-
         SharedPreferencesCompat.apply(editor);
     }
 
