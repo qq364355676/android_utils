@@ -1,0 +1,85 @@
+package com.utils.commonutils.util;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+/**
+ * 网络相关工具类
+ */
+public class NetWorkUtils {
+
+    /**
+     * 判断当前网络是否可用
+     *
+     * @return
+     */
+    public static boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (mConnectivityManager == null) return false;
+            NetworkInfo info = mConnectivityManager.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                if (info.getState() == NetworkInfo.State.CONNECTED) return true;
+                }
+            }
+        return false;
+
+    }
+
+    /**
+     * 判断当前wifi是否可用
+     *
+     * @return
+     */
+    public static boolean isWifiConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (mConnectivityManager == null){
+                return false;
+            }else {
+                return mConnectivityManager.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断MOBILE网络是否可用
+     *
+     * @return
+     */
+    public boolean isMobileConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (mConnectivityManager == null) {
+                return false;
+            }else {
+                return mConnectivityManager.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 获取当前网络连接的类型信息 1 wifi 2 移动网络 -1 无网络
+     *
+     * @return
+     */
+    public int getConnectedType(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager
+                    .getActiveNetworkInfo();
+            if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
+                return mNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI ? 1
+                        : 2;
+            }
+        }
+        return -1;
+    }
+}
